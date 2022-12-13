@@ -1,0 +1,12 @@
+﻿@model HomeViewModel
+@*@System.Globalization.CultureInfo.CurrentUICulture*@
+
+<partial name="_Carousel" />
+
+<h2>Candy On Sale</h2>
+<div class="row">
+    @foreach (var candy in Model.CandyOnSale)
+    {
+        <partial name="_CandyCard" model="candy" />
+    }
+</div>

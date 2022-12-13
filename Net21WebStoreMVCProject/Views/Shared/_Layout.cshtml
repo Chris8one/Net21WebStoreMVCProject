@@ -1,36 +1,59 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<IdentityUser> signInManager;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" />
-    <title>@ViewData["Title"] - Net21WebStore_MVC Core</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
-    <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/jquery3.4.1/jquery.js"></script>
+    <script src="~/js/site.js"></script>
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
+    <link href="~/content/Site.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <title>@ViewData["Title"] - Net21WebStore_MVC Core</title>
 </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Net21WebStoreMVC_Core_Project</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Candy" asp-action="List">CandyList</a>
-                            </li>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a asp-controller="CandyHome" asp-action="Index">Home</a></li>
+                            <li><a asp-controller="CandyHome" asp-action="About">About Us</a></li>
+                            <li><a asp-controller="Candy" asp-action="List">All Candy</a></li>
+                            @await Component.InvokeAsync("ShoppingCartSummary")
+                            @await Component.InvokeAsync("CategoryMenu")
+
+                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false">
+                                        Manage
+                                    </a>
+                                    <ul class ="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a asp-controller="Administration" asp-action="ListUsers" class="dropdown-item">Users</a></li>
+                                        <li><a asp-controller="Administration" asp-action="ListRoles" class="dropdown-item">Roles</a></li>
+                                        <li><a asp-controller="Administration" asp-action="CreateCandy">Add New Candy</a></li>
+                                    </ul>
+                                </li>
+                            <li><a asp-controller="Administration" asp-action="CandyList">Candy List</a></li>
+                            }
+
+                        </ul>
+                        <ul class="nav navbar-nav" style="float: right">
+                            <partial name="_LoginPartial" />
                         </ul>
                     </div>
                 </div>
@@ -56,9 +79,9 @@
                 &copy; 2022 - Net21WebStoreMVCProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
         </footer>
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>*@
         @RenderSection("Scripts", required: false)
     </body>
 </html>

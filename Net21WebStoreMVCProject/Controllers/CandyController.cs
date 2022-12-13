@@ -29,5 +29,17 @@ namespace Net21WebStoreMVCProject.Controllers
 
             return View(candyListViewModel);
         }
+
+        public IActionResult Details(int id)
+        {
+            var candy = _candyRepository.GetCandyById(id);
+
+            if (candy == null)
+            {
+                return NotFound();
+            }
+
+            return View(candy);
+        }
     }
 }

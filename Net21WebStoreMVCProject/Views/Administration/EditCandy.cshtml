@@ -1,0 +1,75 @@
+﻿@model CandyProductViewModel
+
+@{ ViewData["Title"] = "EditCandy"; }
+
+<h2>EditCandy</h2>
+
+<h4>Candy</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditCandy">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Candy.CandyId" />
+            <div class="form-group">
+                <label asp-for="Candy.Name" class="control-label"></label>
+                <input asp-for="Candy.Name" class="form-control" />
+                <span asp-validation-for="Candy.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Candy.Description" class="control-label"></label>
+                <input asp-for="Candy.Description" class="form-control" />
+                <span asp-validation-for="Candy.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Candy.Price" class="control-label"></label>
+                <input asp-for="Candy.Price" class="form-control" />
+                <span asp-validation-for="Candy.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Candy.ImageUrl" class="control-label"></label>
+                <input asp-for="Candy.ImageUrl" class="form-control" />
+                <span asp-validation-for="Candy.ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Candy.ImageThumbnailUrl" class="control-label"></label>
+                <input asp-for="Candy.ImageThumbnailUrl" class="form-control" />
+                <span asp-validation-for="Candy.ImageThumbnailUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Candy.IsOnSale" /> @Html.DisplayNameFor(model => model.Candy.IsOnSale)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Candy.IsInStock" /> @Html.DisplayNameFor(model => model.Candy.IsInStock)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Candy.CategoryId" class="control-label"></label>
+                <select asp-for="Candy.CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
+                    @foreach (var category in Model.Category)
+                    {
+        <option value="@category.CategoryId">@category.CategoryName</option>}
+                </select>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="CandyList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

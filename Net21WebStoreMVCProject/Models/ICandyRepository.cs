@@ -8,7 +8,7 @@ namespace Net21WebStoreMVCProject.Models
     public interface ICandyRepository
     {
         IEnumerable<Candy> GetAllCandy { get; }
-        IEnumerable<Candy> GetCandyOnsale { get; }
+        IEnumerable<Candy> GetCandyOnSale { get; }
 
         Candy GetCandyById(int candyId);
     }

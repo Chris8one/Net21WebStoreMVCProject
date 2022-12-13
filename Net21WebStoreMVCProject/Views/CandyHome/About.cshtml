@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "About Us";
+}
+
+<head>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/jquery3.4.1/jquery.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAPX8b9fm_S58rh7tBe6Ki5syoO3S2XXPI&callback=initMap&v=weekly" defer></script>
+</head>
+
+<h1>@ViewData["Title"]</h1>
+
+<br />
+<h3>Our location</h3>
+<br />
+<div>
+    <div id="map"></div>
+</div>
+<h4>9641 Sunset Blvd<br />
+Beverly Hills<br />
+CA 90210<br />
+USA</h4>
+
+<script>
+    function initMap() {
+        // The location of Candy Shop
+        const CandyShop = { lat: 34.08096305111216, lng: -118.41433191654649 };
+        // The map, centered at Candy Shop
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 18,
+            center: CandyShop,
+        });
+        // The marker, positioned at Candy Shop
+        const marker = new google.maps.Marker({
+            position: CandyShop,
+            map: map,
+        });
+    }
+
+    window.initMap = initMap;
+</script>

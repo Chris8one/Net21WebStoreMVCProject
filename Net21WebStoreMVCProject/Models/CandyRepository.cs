@@ -36,7 +36,7 @@ namespace Net21WebStoreMVCProject.Models
         //    },
         //};
 
-        public IEnumerable<Candy> GetCandyOnsale
+        public IEnumerable<Candy> GetCandyOnSale
         {
             get
             {
